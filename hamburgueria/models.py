@@ -11,7 +11,7 @@ class Pagamento(models.TextChoices):
     """Opções de métodos de pagamento disponíveis para o pedido."""
     PIX = 'pix', 'pix'
     CARTAO = 'cartao', 'cartao'
-    CONCLUIDO = 'concluido', 'concluido'
+    DINHEIRO = 'dinheiro', 'dinheiro'
 
 
 class Pedidos(models.Model):
@@ -20,7 +20,8 @@ class Pedidos(models.Model):
 
     Attributes:
         id (AutoField): Identificador único do pedido.
-        email = models.EmailField() email do cliente.
+        nome = models.(CharField): nome do cliente.
+        email = models.(EmailField) email do cliente.
         itens (JSONField): Lista de produtos e quantidades do pedido.
         valor_total (DecimalField): Valor total do pedido em reais.
         pagamento (CharField): Método de pagamento escolhido.
@@ -29,6 +30,7 @@ class Pedidos(models.Model):
         criacao (DateTimeField): Data e hora de criação do pedido.
     """
     id = models.AutoField(primary_key= True)
+    nome = models.CharField(max_length=100, null= False)
     email = models.EmailField()
     itens = models.JSONField()
     valor_total = models.DecimalField(max_digits=8, decimal_places=2)
